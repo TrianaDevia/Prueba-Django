@@ -4,7 +4,13 @@ from .models import  Registro, Login,  CustomUser
 from django.contrib.auth.hashers import make_password
 
 class RegistroUsuarioSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True)
+    email = serializers.EmailField(
+        required=True)
+    first_name = serializers.CharField(
+        required=True)
+    last_name = serializers.CharField(
+        required=True)
+    password = serializers.CharField(min_length=8)
 
     class Meta:
         model = get_user_model()
@@ -13,6 +19,10 @@ class RegistroUsuarioSerializer(serializers.ModelSerializer):
         return make_password(value)
 
 class LoginUsuarioSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(
+        required=True)
+    password = serializers.CharField(
+        min_length=8)
     class Meta:
         model = get_user_model()
         fields = ('email',  'password')
