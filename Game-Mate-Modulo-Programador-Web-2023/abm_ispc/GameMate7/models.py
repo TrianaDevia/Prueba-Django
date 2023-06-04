@@ -1,36 +1,17 @@
-from django.contrib.auth.models import AbstractUser, Group, Permission #PermissionsMixin, 
-#from django.db.models.signals import post_save
-#from django.contrib.auth.models import User, UserManager
 from django.db import models
+from django.contrib.auth.models import AbstractUser, Group, Permission 
 from django.utils import timezone
 
 
-
-
-
-#from django.utils import timezone
-#from django.db import models
-#from django.contrib.auth.models import User 
-#from django.db.models.signals import post_save
 # Create your models here.
 
 class CustomUser(AbstractUser):  
-                #PermissionsMixin):
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
-    date_joined = models.DateTimeField(default=timezone.now)
-    groups = models.ManyToManyField(Group, related_name='customuser_set', blank=True)
-    user_permissions = models.ManyToManyField(Permission, related_name='customuser_set', blank=True)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'password']
-     #['first_name','last_name']
-
-    #def __str__(self):
-        #return self.email
+    REQUIRED_FIELDS = ['first_name','last_name', 'password']
     
 
 class Categoria(models.Model):

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from rest_framework import status, generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -10,16 +10,12 @@ from rest_framework.permissions import IsAdminUser, AllowAny, IsAuthenticated
 from .serializers import LoginUsuarioSerializer
 from .serializers import RegistroUsuarioSerializer
 from rest_framework import viewsets
-#from rest_framework import generics, permissions, status
-#from rest_framework.response import Response
-#from rest_framework_simplejwt.tokens import RefreshToken
-#from GameMate7.serializers import RegistroUsuarioSerializer, LoginUsuarioSerializer
-#from django.http import HttpResponse
 
 # Create your views here.
 
 class RegistroUsuarioView(APIView):
     permission_classes = (AllowAny)
+#FALTA TERMINAR REGISTRO ¿ES SIMILAR A LOGIN?
 
 class LoginUsuarioView(APIView):
     permission_classes = (AllowAny)
@@ -38,4 +34,13 @@ class LoginUsuarioView(APIView):
         # Si no es correcto devolvemos un error en la petición
         return Response(
             status=status.HTTP_404_NOT_FOUND)
+    
+    class LogoutUsuarioView(APIView):
+        permission_classes = [AllowAny] 
+        def post(self, request):
+        # Borramos de la request la información de sesión
+            logout(request)
+
+        # Devolvemos la respuesta al cliente
+            return Response(status=status.HTTP_200_OK)
         
