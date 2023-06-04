@@ -24,8 +24,7 @@ from GameMate7 import views
 #from GameMate7.views import RegistroUsuarioView, LoginUsuarioView
 
 router=routers.DefaultRouter()
-router.register(r'registro',views.RegistroUsuarioView)
-router.register(r'login',views.LoginUsuarioView)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     #Api routes
