@@ -44,5 +44,5 @@ class LoginUsuarioView(APIView):
         # Devolvemos la respuesta al cliente
             return Response(status=status.HTTP_200_OK)
     class SignupView(generics.CreateAPIView):
-    serializer_class = UserSerializer
+        serializer_class = UserSerializer
         
